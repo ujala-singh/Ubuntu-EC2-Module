@@ -7,12 +7,12 @@ Docker Container is at https://github.com/razorpay/containers/tree/static-proxy
 >Timeouts are set to 600s
 >This can only run in the razorpay-vpc since it uses the DNS server (10.1.0.2:53)
 # Input variables
-
-  # AMI latest and name tag
+  ```
+  AMI latest and name tag. These can be environment specific.
   - ami_name_tag      = "bionic-razor-base-prod-stand-alone"
   - ami_latest_tag    = "bionic-base-prod-stand-alone"
   - ami_vpc_tag       = "prod"
-
+  ```
 - *name*: name used by all resources
 - subnet: List of all subnets to be spawn resources in. Must match count
 - security-groups: List of all SGs. All are applied to all instances
