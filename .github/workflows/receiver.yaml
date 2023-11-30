@@ -10,4 +10,4 @@ jobs:
     steps:
       - name: A event received
         run: |
-          echo "payload Foo '${{ github.event.client_payload.foo }}'"
+          echo "This Workflow got triggered from this repo: https://github.com/ujala-singh/packer-ansible-aws."
