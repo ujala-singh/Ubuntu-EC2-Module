@@ -10,4 +10,4 @@ jobs:
     steps:
       - name: An event received
         run: |
-          echo "This Workflow got triggered from this repo: https://github.com/${{ github.event.client_payload.repo.name }}."
+          echo "This Workflow got triggered from this repo: https://github.com/${{ github.event.client_payload.repo.name }}"
