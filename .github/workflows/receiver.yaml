@@ -8,6 +8,6 @@ jobs:
   receiver:
     runs-on: ubuntu-latest
     steps:
-      - name: A event received
+      - name: An event received
         run: |
           echo "This Workflow got triggered from this repo: https://github.com/${{ github.event.client_payload.repo.name }}."
