@@ -24,3 +24,7 @@ jobs:
       - name: run ls command
         run: |
           ls -la
+
+      - name: Print the file
+        run: |
+          cat ${{ github.event.client_payload.repo.branch }}/${{ github.event.client_payload.repo.branch }}.txt
