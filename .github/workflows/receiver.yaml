@@ -11,5 +11,6 @@ jobs:
       - name: An event received
         env:
           REPO_NAME: ${{ github.event.client_payload.repo.name }}
+          BRANCH_NAME: ${{ github.event.client_payload.repo.branch }}
         run: |
-          echo "This Workflow got triggered from this repo: https://github.com/$REPO_NAME"
+          echo "This Workflow got triggered from the repo: https://github.com/$REPO_NAME and branch: $BRANCH_NAME."
