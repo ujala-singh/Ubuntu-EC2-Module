@@ -23,31 +23,31 @@ jobs:
         run: echo "version=$(echo `git ls-remote https://${{ secrets.MY_PAT }}@github.com/ujala-singh/Ubuntu-EC2-Module.git ${{ steps.get_branch.outputs.branch }} | awk '{ print $1}' | cut -c1-7`)" >> $GITHUB_OUTPUT
         id: get_version
 
-      - name: Get previous tag from the repo
-        id: get_latest_tag
-        run: |
-          repo_branch=${{ steps.get_branch.outputs.branch }}
-          branch_name="$repo_branch"
-          echo "branch_name=$(echo $branch_name)" >> $GITHUB_OUTPUT
-          tag=$(git tag)
-          git tag | grep $branch_name;
-          tag=$(git tag | grep "\<$branch_name\>" | sort -V | grep 'v[0-9].*' | tail -1)
-          echo $tag
-          echo "tag=$(git tag | grep "\<$branch_name\>" | sort -V | grep 'v[0-9].*' | tail -1)" >> $GITHUB_OUTPUT
-          if echo $tag | grep "999"; then
-              echo "command=$(echo 'm')" >> $GITHUB_OUTPUT
-          else
-              echo "command=$(echo 'p')" >> $GITHUB_OUTPUT
-          fi
-        shell: bash
+      # - name: Get previous tag from the repo
+      #   id: get_latest_tag
+      #   run: |
+      #     repo_branch=${{ steps.get_branch.outputs.branch }}
+      #     branch_name="$repo_branch"
+      #     echo "branch_name=$(echo $branch_name)" >> $GITHUB_OUTPUT
+      #     tag=$(git tag)
+      #     git tag | grep $branch_name;
+      #     tag=$(git tag | grep "\<$branch_name\>" | sort -V | grep 'v[0-9].*' | tail -1)
+      #     echo $tag
+      #     echo "tag=$(git tag | grep "\<$branch_name\>" | sort -V | grep 'v[0-9].*' | tail -1)" >> $GITHUB_OUTPUT
+      #     if echo $tag | grep "999"; then
+      #         echo "command=$(echo 'm')" >> $GITHUB_OUTPUT
+      #     else
+      #         echo "command=$(echo 'p')" >> $GITHUB_OUTPUT
+      #     fi
+      #   shell: bash
 
-      - name: Get new tag by doing semver version bump
-        id: bump_tag
-        run: |
-          git config --global http.postBuffer 1048576000
-          chmod +x ./scripts/version-upgrade.sh
-          bumped_tag=$(./scripts/version-upgrade.sh -${{ steps.get_latest_tag.outputs.command }} ${{ steps.get_latest_tag.outputs.tag }})
-          echo "new_tag=$(echo $bumped_tag)" >> $GITHUB_OUTPUT
+      # - name: Get new tag by doing semver version bump
+      #   id: bump_tag
+      #   run: |
+      #     git config --global http.postBuffer 1048576000
+      #     chmod +x ./scripts/version-upgrade.sh
+      #     bumped_tag=$(./scripts/version-upgrade.sh -${{ steps.get_latest_tag.outputs.command }} ${{ steps.get_latest_tag.outputs.tag }})
+      #     echo "new_tag=$(echo $bumped_tag)" >> $GITHUB_OUTPUT
 
       - name: Create Release on the repo
         id: create_release
