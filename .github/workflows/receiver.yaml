@@ -15,6 +15,12 @@ jobs:
         run: |
           echo "This Workflow got triggered from the repo: https://github.com/$REPO_NAME and branch: $BRANCH_NAME."
 
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/checkout@v3
+        with:
+          token: ${{ secrets.MY_PAT }}
+          fetch-depth: 0
+
       - name: Get branch name
         run: echo "branch=${{ github.event.client_payload.repo.branch }}" >> $GITHUB_OUTPUT
         id: get_branch
